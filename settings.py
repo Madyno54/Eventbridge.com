@@ -1,13 +1,15 @@
+#!/usr/bin/env python
+"""Django's command-line utility for administrative tasks."""
 import os
-import dj_database_url
+import sys
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600
-    )
-}
+def main():
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eventbridge.settings')
+    try:
+        from django.core.management import execute_from_command_line
+    except ImportError as exc:
+        raise ImportError(...) from exc
+    execute_from_command_line(sys.argv)
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if __name__ == '__main__':
+    main()
