@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: eventbridge-web-service
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    envVars:
+      - key: DATABASE_URL
+        value: <your-database-url>
+      - key: SECRET_KEY
+        value: <your-secret-key>
